@@ -1,0 +1,22 @@
+:local(.subTitle) {
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
+:local(button.toolbarBackBtn) {
+  margin-right: 20px;
+  margin-left: -12px;
+}
+
+:local(.fileFormContainer) {
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+:local(.fileFormBody) {
+  max-width: 600px;
+  flex-grow: 1;
+  padding: 16px;
+}
