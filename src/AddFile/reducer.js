@@ -1,6 +1,7 @@
 import {
   UPLOAD_FILE_START,
   UPLOAD_FILE_DONE,
+  ADD_FILE_CLEAN,
 } from './actions';
 
 const INIT_STATE = {
@@ -22,6 +23,8 @@ export default function (state = INIT_STATE, action) {
         fileName,
         content,
       };
+    case ADD_FILE_CLEAN:
+      return {};
     default:
   }
   return state;

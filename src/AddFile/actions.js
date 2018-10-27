@@ -14,6 +14,7 @@ import {
 
 export const UPLOAD_FILE_START = 'UPLOAD_FILE_START';
 export const UPLOAD_FILE_DONE = 'UPLOAD_FILE_DONE';
+export const ADD_FILE_CLEAN = 'ADD_FILE_CLEAN';
 
 export const resetIntervalsByFilterColumn = createResetIntervalsByFilterColumn(
   'addFileForm',
@@ -64,4 +65,8 @@ export function addFileToList() {
       },
     ));
   };
+}
+
+export function cleanAddFileState() {
+  return { type: ADD_FILE_CLEAN };
 }

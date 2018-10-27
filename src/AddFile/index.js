@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,6 +22,7 @@ import { getColumnMinMax } from '../utils';
 import {
   resetIntervalsByFilterColumn,
   addFileToList,
+  cleanAddFileState,
 } from './actions';
 import EditFileForm from '../EditFileForm';
 import ChooseFileForm from './ChooseFileForm';
@@ -62,34 +63,41 @@ const AddFileForm = connect(state => {
   enableReinitialize: false,
 })(EditFileForm));
 
-function AddFile({ history, content, addFileToList }) {
-  return (
-    <div>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            className={commonStyles.toolbarBackBtn}
-            onClick={() => history.goBack()}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit">
-            Add A File
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <div className={commonStyles.fileFormContainer}>
-        <Paper classes={{ root: commonStyles.fileFormBody }}>
-          { !content && <ChooseFileForm /> }
-          { content && <AddFileForm onSubmit={() => {
-            addFileToList();
-            history.push('/');
-          }} /> }
-        </Paper>
+class AddFile extends Component {
+  componentWillUnmount() {
+    this.props.cleanAddFileState();
+  }
+
+  render() {
+    const { history, content, addFileToList } = this.props;
+    return (
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              className={commonStyles.toolbarBackBtn}
+              onClick={() => history.goBack()}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit">
+              Add A File
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <div className={commonStyles.fileFormContainer}>
+          <Paper classes={{ root: commonStyles.fileFormBody }}>
+            { !content && <ChooseFileForm /> }
+            { content && <AddFileForm onSubmit={() => {
+              addFileToList();
+              history.push('/');
+            }} /> }
+          </Paper>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 
@@ -97,4 +105,5 @@ export default connect(state => ({
   content: contentSelector(state),
 }), {
   addFileToList,
+  cleanAddFileState,
 })(AddFile);

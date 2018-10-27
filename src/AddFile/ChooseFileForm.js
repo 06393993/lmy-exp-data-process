@@ -13,6 +13,14 @@ class ChooseFileForm extends Component {
     this.fileInputRef = createRef();
   }
 
+  handleFileInputChange = () => {
+    const files = this.fileInputRef.current.files;
+    if(files && files[0]) {
+      this.props.uploadFile(this.fileInputRef.current.files[0]);
+      this.fileInputRef.current.value = "";
+    }
+  }
+
   render() {
     const { loading } = this.props;
     return (
@@ -27,7 +35,7 @@ class ChooseFileForm extends Component {
               id="choose-file-form-browse-file-input"
               type="file"
               ref={this.fileInputRef}
-              onChange={() => this.props.uploadFile(this.fileInputRef.current.files[0])}
+              onChange={this.handleFileInputChange}
             />
             <label htmlFor="choose-file-form-browse-file-input">
               <Button variant="contained" component="span" color="primary">upload</Button>
