@@ -1,6 +1,7 @@
 import { arrayPush } from 'redux-form';
 
 import {
+  formSelector,
   filterColumnMinMaxSelector,
   contentSelector,
   intervalsSelector,
@@ -11,6 +12,9 @@ import {
 import {
   createResetIntervalsByFilterColumn,
 } from '../actions';
+import {
+    parseDataFile,
+} from '../utils';
 
 export const UPLOAD_FILE_START = 'UPLOAD_FILE_START';
 export const UPLOAD_FILE_DONE = 'UPLOAD_FILE_DONE';
@@ -18,6 +22,7 @@ export const ADD_FILE_CLEAN = 'ADD_FILE_CLEAN';
 
 export const resetIntervalsByFilterColumn = createResetIntervalsByFilterColumn(
   'addFileForm',
+  formSelector,
   contentSelector,
   filterColumnMinMaxSelector,
 );
@@ -27,26 +32,12 @@ export function uploadFile(file) {
     dispatch({
       type: UPLOAD_FILE_START,
     });
-    const fr = new FileReader();
-    fr.readAsText(file);
-    fr.onloadend = () => {
-      const rawContent = fr.result;
-      const content = rawContent
-        .split('\n')
-        .map((line, nrow) => line.split(' ').filter(cell => cell).map((cell, ncol) => {
-          const res = parseFloat(cell);
-          if(isNaN(res)) {
-            console.log(`invalid cell(${nrow}:${ncol}): ${cell}`);
-          }
-          return res;
-        }))
-        .filter(row => row.length > 0);
-      dispatch({
+    parseDataFile(file)
+      .then(content => dispatch({
         type: UPLOAD_FILE_DONE,
         fileName: file.name,
         content,
-      });
-    };
+      }));
   };
 }
 

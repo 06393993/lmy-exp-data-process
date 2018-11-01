@@ -2,8 +2,6 @@ import React, { Component, createRef } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -20,6 +18,7 @@ import {
 } from './actions';
 import { filesSelector } from './selectors';
 import FileList from './FileList';
+import AddFAB from './AddFAB';
 
 class Home extends Component {
   constructor(props) {
@@ -50,7 +49,7 @@ class Home extends Component {
   }
 
   render() {
-    const { history, showMenu, hideMenu, menuOpen } = this.props;
+    const { showMenu, hideMenu, menuOpen } = this.props;
     return (
       <div style={{ height: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         <AppBar position="static">
@@ -75,12 +74,7 @@ class Home extends Component {
           <MenuItem onClick={this.handleMenuExportClick}>Export</MenuItem>
           <MenuItem onClick={this.handleMenuClearAllClick}>Clear All</MenuItem>
         </Menu>
-        <Button
-          variant="fab"
-          color="primary"
-          style={{ position: 'absolute', bottom: '24px', right: '24px', zIndex: '100' }}
-          onClick={() => history.push('/add')}
-        ><AddIcon /></Button>
+        <AddFAB />
         <div style={{ flex: '1', overflow: 'hidden scroll' }}>
           <FileList />
         </div>

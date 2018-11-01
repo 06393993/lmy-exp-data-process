@@ -107,7 +107,11 @@ export default function EditFileForm({
 
   resetIntervalsByFilterColumn,
   onSubmit,
+
+  withoutSubmit,
+  name,
 }) {
+  const namePrefix = name ? `${name}.` : "";
   return (
     <Fragment>
       <Typography variant="h6" className={commonStyles.subTitle}>
@@ -123,7 +127,7 @@ export default function EditFileForm({
       <Typography variant="body1">
         Start from Column #0.
       </Typography>
-      <Field name="filterOn" component={Select} onChange={(e, newValue) => resetIntervalsByFilterColumn(newValue)}>{
+      <Field name={`${namePrefix}filterOn`} component={Select} onChange={(e, newValue) => resetIntervalsByFilterColumn(newValue)}>{
         Array(...Array(numOfColumns)).map((_, i) => (
           <MenuItem key={i} value={i}>Column #{i}</MenuItem>
         ))
@@ -131,7 +135,7 @@ export default function EditFileForm({
       <Typography variant="h6" className={commonStyles.subTitle}>
         Define The Intervals
       </Typography>
-      <FieldArray name="intervals" component={Intervals} defaultFrom={intervalsDefaultFrom} defaultTo={intervalsDefaultTo} />
+      <FieldArray name={`${namePrefix}intervals`} component={Intervals} defaultFrom={intervalsDefaultFrom} defaultTo={intervalsDefaultTo} />
       <Typography variant="body1">
         {numOfSelectedRows} row(s) of data are selected. Below are the first 10 selected rows.
       </Typography>
@@ -142,12 +146,12 @@ export default function EditFileForm({
       {selectedRowsSample.length > 0 && <SimpleDataTable data={[result]} />}
       {selectedRowsSample.length === 0 && <Typography variant="body1">No data is selected.</Typography>}
       <div style={{ marginTop: "32px", width: "100%", display: "flex", flexDirection: "row-reverse" }}>
-        <Button
+        {!withoutSubmit && <Button
           disabled={!canSubmit}
           variant="contained"
           color="primary"
           onClick={() => onSubmit()}
-        >save</Button>
+        >save</Button>}
       </div>
     </Fragment>
   );

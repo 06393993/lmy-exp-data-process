@@ -5,3 +5,5 @@ export const filesSelector = createSelector(
   getFormValues('files'),
   (filesForm) => filesForm && filesForm.files ? filesForm.files : [],
 );
+
+export const addFABCollapsedSelector = state => state.homeUI.addFABCollpsed;

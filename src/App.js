@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 import Home from './Home';
 import AddFile from './AddFile';
+import AddFiles from './AddFiles';
 import EditFile from './EditFile';
 
 const composeEnhancers = typeof window === 'object' &&
@@ -32,6 +33,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/add" component={AddFile} />
+              <Route exact path="/add-many" component={AddFiles} />
               <Route exact path="/edit" component={EditFile} />
               <Redirect to="/" />
             </Switch>

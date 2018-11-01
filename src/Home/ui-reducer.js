@@ -1,6 +1,8 @@
 import {
   HOME_UI_SHOW_MENU,
   HOME_UI_HIDE_MENU,
+  HOME_UI_EXPAND_ADD_FAB,
+  HOME_UI_COLLAPSE_ADD_FAB,
 } from './actions';
 
 const INIT_STATE = {
@@ -17,6 +19,16 @@ export default function (state = INIT_STATE, action) {
       return {
         ...state,
         menuOpen: false,
+      };
+    case HOME_UI_EXPAND_ADD_FAB:
+      return {
+        ...state,
+        addFABCollpsed: true,
+      };
+    case HOME_UI_COLLAPSE_ADD_FAB:
+      return {
+        ...state,
+        addFABCollpsed: false,
       };
     default:
   }
