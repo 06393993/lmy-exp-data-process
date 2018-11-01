@@ -13,3 +13,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * add multiple files
 * store the state into the localstorage(may use redux-persist)
 * refine mobile views
+* add extra space to the end of file list, in case the add FAB block the remove button of the several last files

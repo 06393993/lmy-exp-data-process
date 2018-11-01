@@ -1,6 +1,7 @@
 import { change } from 'redux-form';
 
 import {
+  formSelector,
   contentSelector,
   filterColumnMinMaxSelector,
   fileNameSelector,
@@ -25,6 +26,7 @@ export function setEditFile(file, index) {
 
 export const resetIntervalsByFilterColumn = createResetIntervalsByFilterColumn(
   'editFileForm',
+  formSelector,
   contentSelector,
   filterColumnMinMaxSelector,
 );

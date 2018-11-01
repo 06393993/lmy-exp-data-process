@@ -70,13 +70,7 @@ export function createFileFormSelectors(fileSelector, formSelector, isFormValidS
     },
   );
 
-  const canSubmitSelector = createSelector(
-    isFormValidSelector,
-    selectedRowsSelector,
-    (valid, selectedRows) => valid && selectedRows.length > 0,
-  );
-
-  return {
+  const res = {
     fileNameSelector,
     filterOnSelector,
     contentSelector,
@@ -86,6 +80,15 @@ export function createFileFormSelectors(fileSelector, formSelector, isFormValidS
     intervalsSelector,
     selectedRowsSelector,
     resultSelector,
-    canSubmitSelector,
   };
+
+  if(isFormValidSelector) {
+    res.canSubmitSelector = createSelector(
+      isFormValidSelector,
+      selectedRowsSelector,
+      (valid, selectedRows) => valid && selectedRows.length > 0,
+    );
+  }
+
+  return res;
 }
