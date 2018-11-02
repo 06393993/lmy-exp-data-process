@@ -156,11 +156,15 @@ export function proceedFromSelectFilterFile() {
   };
 }
 
+export function resetAddFiles() {
+    return { type: ADD_FILES_RESET };
+}
+
 export function submit(files) {
   return dispatch => {
     for(const file of files) {
       dispatch(arrayPush('files', 'files', file));
     }
-    dispatch({ type: ADD_FILES_RESET });
+    dispatch(resetAddFiles());
   }
 }

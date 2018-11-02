@@ -17,8 +17,15 @@ import ReviewForm from './ReviewForm';
 import {
   activeStepSelector,
 } from './selectors';
+import {
+  resetAddFiles,
+} from './actions';
 
 class AddFiles extends Component {
+  componentWillUnmount() {
+    this.props.resetAddFiles();
+  }
+
   render() {
     const {
       history,
@@ -67,4 +74,6 @@ class AddFiles extends Component {
 
 export default connect(state => ({
   activeStep: activeStepSelector(state),
-}))(AddFiles);
+}), {
+  resetAddFiles,
+})(AddFiles);
