@@ -35,10 +35,14 @@ export function resetActiveStep() {
   return { type: ADD_FILES_RESET_ACTIVE_STEP };
 }
 
-export function uploadFiles(files) {
+export function uploadFiles(_files) {
+  const files = [];
+  for(let i = 0; i < _files.length; i++) {
+    files.push(_files[i]);
+  }
   return {
     type: ADD_FILES_UPLOAD_DATA_FILES,
-    files: [ ...files ],
+    files,
   };
 }
 
