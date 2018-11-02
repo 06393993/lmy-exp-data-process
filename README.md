@@ -11,6 +11,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - 0.2.0
     * upload multiple files
 
+- 0.2.1
+    * fix bug that prevents user to upload data files on Edge/IE
+
 ## TODO
 
 * store the state into the localstorage(may use redux-persist)
